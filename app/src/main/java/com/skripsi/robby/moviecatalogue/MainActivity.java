@@ -2,6 +2,7 @@ package com.skripsi.robby.moviecatalogue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
@@ -31,19 +32,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         listView.setOnItemClickListener(this);
 
-        prepare();
+        prep();
         addItem();
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(MainActivity.this, films.get(i).getTitle(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("Film", films.get(i));
+        startActivity(intent);
     }
 
-    private void prepare() {
+    private void prep() {
         dataTitle = getResources().getStringArray(R.array.data_title);
         dataDescription = getResources().getStringArray(R.array.data_description);
+        dataFact = getResources().getStringArray(R.array.data_fact);
         dataPhoto = getResources().obtainTypedArray(R.array.data_photo);
     }
 
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             film.setPhoto(dataPhoto.getResourceId(i, -1));
             film.setTitle(dataTitle[i]);
             film.setDescription(dataDescription[i]);
+            film.setFact(dataFact[i]);
             films.add(film);
         }
         adapter.setFilms(films);

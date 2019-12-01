@@ -37,6 +37,6 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:justificationMode="inter_word"
-            android:text="@string/desc" />
+            android:text="@string/value" />
     </LinearLayout>
 </LinearLayout>
